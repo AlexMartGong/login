@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,12 +19,20 @@ class LoginActivity : AppCompatActivity() {
     lateinit var txtUser: EditText
     lateinit var txtPassword: EditText
 
+    lateinit var  txtInputUser: TextInputLayout
+    lateinit var txtInputPassword: TextInputLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+
         txtUser = findViewById(R.id.txtUser)
         txtPassword = findViewById(R.id.txtPass)
+
+        txtInputUser = findViewById(R.id.txtInputUser)
+        txtInputPassword = findViewById(R.id.txtInputPassword)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -35,9 +44,10 @@ class LoginActivity : AppCompatActivity() {
         val user = txtUser.text.toString()
         val password = txtPassword.text.toString()
 
-        // Validar que los campos no sean vacíos
         if (user.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Los campos no pueden estar vacíos", Toast.LENGTH_LONG).show()
+            txtInputPassword.error = "No vacios"
+            txtInputUser.error = "No vacios"
+
         } else if (user.equals(userP) && password.equals(passP)) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -46,5 +56,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    fun registryNew (v: View) {
+        val intent = Intent(this, RegistryActivity2::class.java)
+        startActivity(intent)
+    }
 
 }

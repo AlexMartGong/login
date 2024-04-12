@@ -4,4 +4,11 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="User">User</string>
+    <string name="txt_registro">Registrar nuevo</string>
+    <string name="txt_title" />
+    <string name="txtTitle">Registry new user</string>
+    <string name="name">Name</string>
+    <string name="carrera">Carrera</string>
+    <string name="numberphone">Number phone</string>
+    <string name="save">Save</string>
 </resources>
