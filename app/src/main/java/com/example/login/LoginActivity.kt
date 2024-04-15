@@ -51,8 +51,6 @@ class LoginActivity : AppCompatActivity() {
         } else if (user.equals(userP) && password.equals(passP)) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-        } else {
-            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
         }
     }
 

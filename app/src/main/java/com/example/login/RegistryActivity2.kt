@@ -55,19 +55,21 @@ class RegistryActivity2 : AppCompatActivity() {
         val pass1 = txtPassword.text.toString()
         val pass2 = txtPassword2.text.toString()
 
+        if (txtPhone.text.isEmpty()) txtInputPhoneNumber.error = "El campo no debe de estar vacío"
+        if (txtPassword.text.isEmpty()) txtInputPassword.error = "El campo no debe de estar vacío"
+        if (txtCarrera.text.isEmpty()) txtInputCarrera.error = "El campo no debe de estar vacío"
+        if (txtName.text.isEmpty()) txtInputName.error = "El campo no debe de estar vacío"
+        if (txtPassword2.text.isEmpty()) txtInputPassword2.error = "El campo no debe de estar vacío"
+        if (txtUser.text.isEmpty()) txtInputUser.error = "El campo no debe de estar vacío"
+
+        /*
         if (txtPhone.text.isEmpty() || txtPassword.text.isEmpty() || txtCarrera.text.isEmpty() ||
             txtName.text.isEmpty() || txtPassword2.text.isEmpty() || txtUser.text.isEmpty()
         ) {
 
-            txtInputCarrera.error = "No campos Vacios"
-            txtInputPassword.error = "No campos Vacios"
-            txtInputPassword2.error = "No campos Vacios"
-            txtInputName.error = "No campos Vacios"
-            txtInputPhoneNumber.error = "No campos Vacios"
-            txtInputUser.error = "No campos Vacios"
-            return
-
         }
+         */
+
         if (pass1 == pass2) {
             Toast.makeText(this, "Save", Toast.LENGTH_LONG).show()
         }
