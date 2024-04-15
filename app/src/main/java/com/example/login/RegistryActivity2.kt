@@ -12,19 +12,19 @@ import com.google.android.material.textfield.TextInputLayout
 
 class RegistryActivity2 : AppCompatActivity() {
 
-    lateinit var txtUser: EditText
-    lateinit var txtPassword: EditText
-    lateinit var txtPassword2: EditText
-    lateinit var txtCarrera: EditText
-    lateinit var txtPhone: EditText
-    lateinit var txtName: EditText
+    private lateinit var txtUser: EditText
+    private lateinit var txtPassword: EditText
+    private lateinit var txtPassword2: EditText
+    private lateinit var txtCarrera: EditText
+    private lateinit var txtPhone: EditText
+    private lateinit var txtName: EditText
 
-    lateinit var txtInputUser: TextInputLayout
-    lateinit var txtInputPassword: TextInputLayout
-    lateinit var txtInputPassword2: TextInputLayout
-    lateinit var txtInputName: TextInputLayout
-    lateinit var txtInputCarrera: TextInputLayout
-    lateinit var txtInputPhoneNumber: TextInputLayout
+    private lateinit var txtInputUser: TextInputLayout
+    private lateinit var txtInputPassword: TextInputLayout
+    private lateinit var txtInputPassword2: TextInputLayout
+    private lateinit var txtInputName: TextInputLayout
+    private lateinit var txtInputCarrera: TextInputLayout
+    private lateinit var txtInputPhoneNumber: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,28 +51,31 @@ class RegistryActivity2 : AppCompatActivity() {
     }
 
     fun save(v: View) {
-
         val pass1 = txtPassword.text.toString()
         val pass2 = txtPassword2.text.toString()
 
-        if (txtPhone.text.isEmpty()) txtInputPhoneNumber.error = "El campo no debe de estar vacío"
-        if (txtPassword.text.isEmpty()) txtInputPassword.error = "El campo no debe de estar vacío"
-        if (txtCarrera.text.isEmpty()) txtInputCarrera.error = "El campo no debe de estar vacío"
-        if (txtName.text.isEmpty()) txtInputName.error = "El campo no debe de estar vacío"
-        if (txtPassword2.text.isEmpty()) txtInputPassword2.error = "El campo no debe de estar vacío"
-        if (txtUser.text.isEmpty()) txtInputUser.error = "El campo no debe de estar vacío"
+        val fields = listOf(
+            txtPhone to txtInputPhoneNumber,
+            txtPassword to txtInputPassword,
+            txtCarrera to txtInputCarrera,
+            txtName to txtInputName,
+            txtPassword2 to txtInputPassword2,
+            txtUser to txtInputUser
+        )
 
-        /*
-        if (txtPhone.text.isEmpty() || txtPassword.text.isEmpty() || txtCarrera.text.isEmpty() ||
-            txtName.text.isEmpty() || txtPassword2.text.isEmpty() || txtUser.text.isEmpty()
-        ) {
-
+        for ((textView, textInputLayout) in fields) {
+            if (textView.text.isEmpty()) {
+                textInputLayout.error = "El campo no debe de estar vacío"
+            }
         }
-         */
 
-        if (pass1 == pass2) {
-            Toast.makeText(this, "Save", Toast.LENGTH_LONG).show()
+        val allFieldsFilled = fields.none { it.first.text.isEmpty() }
+        if (allFieldsFilled) {
+            if (pass1 == pass2) {
+                Toast.makeText(this, "Save", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Password does not match", Toast.LENGTH_LONG).show()
+            }
         }
     }
-
 }
