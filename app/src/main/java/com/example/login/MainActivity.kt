@@ -1,5 +1,6 @@
 package com.example.login
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -20,5 +21,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val preferences = getSharedPreferences("myData", Context.MODE_PRIVATE)
+        val txtName = findViewById<TextView>(R.id.txtName)
+        val txtCarrera = findViewById<TextView>(R.id.txtCarrera)
+        val txtPhone = findViewById<TextView>(R.id.txtPhone)
+
+        txtName.text = preferences.getString("name", "xxx")
+        txtCarrera.text = preferences.getString("carrera", "xxx")
+        txtPhone.text = preferences.getString("phone", "xxx")
     }
 }

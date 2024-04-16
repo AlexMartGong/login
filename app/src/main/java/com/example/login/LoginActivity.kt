@@ -1,7 +1,9 @@
 package com.example.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -13,19 +15,26 @@ import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
 
-    val userP = "AlexMG"
-    val passP = "12345"
+    private var user = ""
+    private var pass = ""
+    private var login = false
 
-    lateinit var txtUser: EditText
-    lateinit var txtPassword: EditText
 
-    lateinit var  txtInputUser: TextInputLayout
-    lateinit var txtInputPassword: TextInputLayout
+    private lateinit var txtUser: EditText
+    private lateinit var txtPassword: EditText
+
+    private lateinit var  txtInputUser: TextInputLayout
+    private lateinit var txtInputPassword: TextInputLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+
+        val preferences = getSharedPreferences("myData", Context.MODE_PRIVATE)
+        user = preferences.getString("user", "xxx").toString()
+        pass = preferences.getString("password", "xxx").toString()
+        login = preferences.getBoolean("login", false)
 
         txtUser = findViewById(R.id.txtUser)
         txtPassword = findViewById(R.id.txtPass)
@@ -48,9 +57,12 @@ class LoginActivity : AppCompatActivity() {
             txtInputPassword.error = "No vacios"
             txtInputUser.error = "No vacios"
 
-        } else if (user.equals(userP) && password.equals(passP)) {
+        } else if (!this.user.equals("xxx") && user.equals(this.user) && password.equals(this.pass)) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        } else {
+            txtInputUser.error = "User incorrect"
+            txtInputPassword.error = "Password incorrect"
         }
     }
 

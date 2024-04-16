@@ -11,4 +11,7 @@
     <string name="carrera">Carrera</string>
     <string name="numberphone">Number phone</string>
     <string name="save">Save</string>
+    <string name="Hello">Hello World!</string>
+    <string name="edit">Edit</string>
+    <string name="close">Close</string>
 </resources>

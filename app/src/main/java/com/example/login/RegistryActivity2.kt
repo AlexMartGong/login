@@ -1,5 +1,6 @@
 package com.example.login
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -51,6 +52,8 @@ class RegistryActivity2 : AppCompatActivity() {
     }
 
     fun save(v: View) {
+        val preferences = getSharedPreferences("myData", Context.MODE_PRIVATE)
+        val edit = preferences.edit()
         val pass1 = txtPassword.text.toString()
         val pass2 = txtPassword2.text.toString()
 
@@ -72,7 +75,16 @@ class RegistryActivity2 : AppCompatActivity() {
         val allFieldsFilled = fields.none { it.first.text.isEmpty() }
         if (allFieldsFilled) {
             if (pass1 == pass2) {
-                Toast.makeText(this, "Save", Toast.LENGTH_LONG).show()
+                edit.putString("user", txtUser.text.toString())
+                edit.putString("password", txtPassword.text.toString())
+                edit.putString("name", txtName.text.toString())
+                edit.putString("carrera", txtCarrera.text.toString())
+                edit.putString("phone", txtPhone.text.toString())
+                edit.putBoolean("login", false)
+
+                edit.commit()
+                Toast.makeText(this, "Save user", Toast.LENGTH_LONG).show()
+                finish()
             } else {
                 Toast.makeText(this, "Password does not match", Toast.LENGTH_LONG).show()
             }
