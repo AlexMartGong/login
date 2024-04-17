@@ -74,15 +74,16 @@ class RegistryActivity2 : AppCompatActivity() {
 
         val allFieldsFilled = fields.none { it.first.text.isEmpty() }
         if (allFieldsFilled) {
+
             if (pass1 == pass2) {
                 edit.putString("user", txtUser.text.toString())
                 edit.putString("password", txtPassword.text.toString())
                 edit.putString("name", txtName.text.toString())
                 edit.putString("carrera", txtCarrera.text.toString())
                 edit.putString("phone", txtPhone.text.toString())
-                edit.putBoolean("login", false)
+                edit.putBoolean("login", true)
 
-                edit.commit()
+                edit.apply()
                 Toast.makeText(this, "Save user", Toast.LENGTH_LONG).show()
                 finish()
             } else {

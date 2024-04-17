@@ -47,6 +47,11 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //1.    The login is true or false
+        if (login) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun authenticate(v: View) {
@@ -58,8 +63,16 @@ class LoginActivity : AppCompatActivity() {
             txtInputUser.error = "No vacios"
 
         } else if (!this.user.equals("xxx") && user.equals(this.user) && password.equals(this.pass)) {
+
+            // 2.   The login equals true
+            val preferences = getSharedPreferences("myData", Context.MODE_PRIVATE)
+            val edit = preferences.edit()
+            edit.putBoolean("login", true)
+            edit.apply()
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
         } else {
             txtInputUser.error = "User incorrect"
             txtInputPassword.error = "Password incorrect"
